@@ -1,22 +1,16 @@
-<script lang="ts">
-import type { PropType } from 'vue';
-
-export default {
-  props: {
-    value: {
-      type: Number as PropType<number>,
-      required: true,
-    },
-    label: {
-      type: String as PropType<string>,
-      required: true,
-    }
-  }
+<script setup lang="ts">
+type Props = {
+  number: string| number
+  label: string;
+  currencySign?: string
 }
+
+
+defineProps<Props>()
 </script>
 
 <template>
   <div class="dashboard-box">
-    <span>{{ value }}</span> {{ label }}
+    <span>{{ number }}{{ currencySign }}</span> {{ label }}
   </div>
 </template>

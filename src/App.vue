@@ -8,10 +8,14 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav>
         <RouterLink to="/">Home</RouterLink>
       </nav>
+      <nav>
+        <RouterLink to="/transactions">Transactions</RouterLink>
+      </nav>
     </div>
   </header>
-
-  <RouterView />
+  <Suspense>
+    <RouterView />
+  </Suspense>
 </template>
 
 <style lang="scss" scoped>
