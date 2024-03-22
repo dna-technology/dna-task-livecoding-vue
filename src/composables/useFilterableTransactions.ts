@@ -5,7 +5,7 @@ import { type Transaction } from '../types/Transaction.type';
 type TransactionWithDateAsTimestamp = Transaction & { unixDate: number }
 
 export default function useFilterableTransactions(merchantId?: Ref<string>, startDate?: Ref<string>, endDate?: Ref<string>) {
-  // TODO - TERRIBLE. filtering like that should always be done on backend side
+  //@TODO - TERRIBLE. filtering like that should always be done on backend side
   // so the frontend only handles the result
 
   const rawData = ref<TransactionWithDateAsTimestamp[]>([])
@@ -27,7 +27,7 @@ export default function useFilterableTransactions(merchantId?: Ref<string>, star
         }
     })
   })
-  // TODO using separate reduce for readiness, performance wise we could use the loop
+  //@TODO using separate reduce for readiness, performance wise we could use the loop
   // in filteredData or even better just get this from backend because we can
   // be displaying only a portion of all orders (because of pagination)
   const amount = computed(() => +filteredData.value.reduce((sum, current) => sum + current.amount, 0).toFixed(2))

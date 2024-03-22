@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { defineModel, defineProps, computed, withDefaults } from 'vue'
 
-// TODO maybe typing could be improved for options that it includes 
+//@TODO maybe typing could be improved for options that it includes 
 // idProperty an nameProperty
 export interface Props {
   options: Record<string, any>[]

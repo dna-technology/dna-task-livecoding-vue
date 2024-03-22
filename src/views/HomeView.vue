@@ -14,7 +14,7 @@ try {
   merchants.value = await fetchMerchants()
   setData(transactions.value)
 } catch (err) {
-  // TODO - implement some error notification to end user
+  //@TODO - implement some error notification to end user
 }
 </script>
 

@@ -20,7 +20,7 @@ const route = useRoute()
 try {
   transaction.value = await fetchTransaction(route.params.id as string)
 } catch (err) {
-  // TODO handle error notification to user
+  //@TODO handle error notification to user
 }
 
 </script>

@@ -21,7 +21,7 @@ const endDate = computed(queryGetterAndSetter('endDate'))
 try {
   merchants.value = await fetchMerchants();
 } catch(err) {
-  // TODO some error notification for user
+  //@TODO some error notification for user
 }
 
 const { data, setData, amount } =  useFilterableTransactions(merchant, startDate, endDate)
@@ -29,23 +29,23 @@ try {
   transactions.value =  await fetchTransactions();
   setData(transactions.value)
 } catch(err) {
-// TODO some error notification for user
+//@TODO some error notification for user
 }
 </script>
 
 <template>
   <main>
-    <!-- TODO - filters could be abstracted to the separate component, making them reusable across aplication -->
+    <!--@TODO - filters could be abstracted to the separate component, making them reusable across aplication -->
     <div class="filters">
       <div class="filters__block">
         <p>Select merchant</p>
-        <!-- TODO - this search should be searchable, but doing searchable select from scratch would be too time consuming -->
+        <!--@TODO - this search should be searchable, but doing searchable select from scratch would be too time consuming -->
         <!-- and I don't want to install UI libraries for the interview because they can impose some decision-making regarding dats structure -->
         <SelectInput class="input" v-model="merchant" :options="merchants" blank-option-text="All merchants" />
       </div>
       <div class="filters__block">
         <p>Select startDate</p>
-          <!-- TODO usually we would like to have more visially appealing date pickers -->
+          <!--@TODO usually we would like to have more visially appealing date pickers -->
         <input class="input" label="startDate" type="date" id="startDate" name="startDate" v-model="startDate" />
       </div>
       <div class="filters__block">
