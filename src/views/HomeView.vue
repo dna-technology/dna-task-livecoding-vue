@@ -1,31 +1,28 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-import CurrencyBox from '@/components/CurrencyBox.vue';
+import useAPi from '../composables/useApi';
 import NumberBox from '@/components/NumberBox.vue';
 import { type Transaction } from '../types/Transaction.type';
 import { type Merchant } from '../types/Merchant.type';
-
+const { fetchTransactions, fetchMerchants } = useAPi()
+import useFilterableTransactions from '@/composables/useFilterableTransactions';
+const  { amount, setData, data } = useFilterableTransactions()
 const transactions = ref<Transaction[]>([]);
-const transactionsSum = ref<Number>(0);
-fetch('http://localhost:8000/transactions')
-  .then(response => response.json())
-  .then(data => {
-    transactions.value = data
-    transactionsSum.value = +transactions.value.reduce((sum, current) => sum + current.amount, 0).toFixed(2) || 0;
-  })
-
 const merchants = ref<Merchant[]>([]);
-fetch('http://localhost:8000/merchants')
-  .then(response => response.json())
-  .then(data => merchants.value = data)
+try {
+  transactions.value =  await fetchTransactions();
+  merchants.value = await fetchMerchants()
+  setData(transactions.value)
+} catch (err) {
+  // TODO - implement some error notification to end user
+}
 </script>
 
 <template>
   <main>
-    <CurrencyBox :value="transactionsSum.valueOf()" currency-sign="$" label="Profit" />
-    <NumberBox :value="transactions.length" label="Transactions" />
-    <NumberBox :value="merchants.length" label="Merchants" />
+    <NumberBox :number="amount" currency-sign="$" label="Profit" />
+    <NumberBox :number="transactions.length" label="Transactions" />
+    <NumberBox :number="merchants.length" label="Merchants" />
   </main>
 </template>
 
